@@ -1,0 +1,101 @@
+ #detial
+    #右侧车顶
+    right_top_com_score=models.IntegerField()
+    right_top_yh=models.IntegerField()
+    right_top_yz = models.IntegerField()
+    right_top_yq = models.IntegerField()
+    #右C2柱
+    right_c2_com_score=models.IntegerField()
+    right_c2_yh = models.IntegerField()
+    right_c2_yz = models.IntegerField()
+    right_c2_yq = models.IntegerField()
+    #右A2柱
+    right_a2_com_score = models.IntegerField()
+    right_a2_wq = models.IntegerField()
+    right_a2_wz = models.IntegerField()
+    right_a2_wh = models.IntegerField()
+    right_a2_nq = models.IntegerField()
+    right_a2_nz = models.IntegerField()
+    right_a2_nh = models.IntegerField()
+    #右后门
+    right_b_door_com_score = models.IntegerField()
+    right_b_door_yq = models.IntegerField()
+    right_b_door_yz = models.IntegerField()
+    right_b_door_yh = models.IntegerField()
+    #左A3柱
+    left_a3_com_score = models.IntegerField()
+    left_a3_zq= models.IntegerField()
+    left_a3_zz = models.IntegerField()
+    left_a3_zh = models.IntegerField()
+    #左前门
+    left_f_door_com_score = models.IntegerField()
+    left_f_door_zq = models.IntegerField()
+    left_f_door_zz = models.IntegerField()
+    left_f_door_zh = models.IntegerField()
+    #右后门下裙
+    right_b_door_buttom_com_score = models.IntegerField()
+    right_b_door_b_yq = models.IntegerField()
+    right_b_door_b_yz = models.IntegerField()
+    right_b_door_b_yh = models.IntegerField()
+
+    # 右前纵梁
+    right_front_rail_com_score = models.IntegerField()
+    right_front_rail_ys = models.IntegerField()
+    right_front_rail_y = models.IntegerField()
+
+    #左前纵梁
+    left_front_rail_com_score = models.IntegerField()
+    left_front_rail_zs = models.IntegerField()
+    left_front_rail_z = models.IntegerField()
+
+    # 左A1柱
+    left_a1_com_score = models.IntegerField()
+    left_a1_wq = models.IntegerField()
+    left_a1_wz = models.IntegerField()
+    left_a1_wh = models.IntegerField()
+    left_a1_nq = models.IntegerField()
+    left_a1_nz = models.IntegerField()
+    left_a1_nh = models.IntegerField()
+
+    # 右后门下裙
+    left_b_door_buttom_com_score = models.IntegerField()
+    left_b_door_b_zq = models.IntegerField()
+    left_b_door_b_zz = models.IntegerField()
+    left_b_door_b_zh = models.IntegerField()
+
+    # 左c3柱
+    left_c3_com_score = models.IntegerField()
+    left_c3_1 = models.IntegerField('左上')
+    left_c3_2 = models.IntegerField('中上')
+    left_c3_3 = models.IntegerField('左中')
+    left_c3_4 = models.IntegerField('中下')
+    left_c3_5 = models.IntegerField('左下')
+
+    # 左C1柱
+    left_c1_com_score = models.IntegerField()
+    left_c1_wq = models.IntegerField()
+    left_c1_wz = models.IntegerField()
+    left_c1_wh = models.IntegerField()
+    left_c1_nq = models.IntegerField()
+    left_c1_nz = models.IntegerField()
+    left_c1_nh = models.IntegerField()
+    #行李舱门
+    trunk_door_com_score = models.IntegerField()
+    trunk_door_r = models.IntegerField()
+    trunk_door_m = models.IntegerField()
+    trunk_door_l = models.IntegerField()
+
+
+
+    #car
+    engine_number=models.CharField(max_length=20)
+    engine_cc = models.CharField(max_length=10)
+    engine_power =models.CharField(max_length=10)
+
+    engine_power_mode=models.CharField(max_length=10)
+    fuel_type=models.CharField(max_length=10,choices=fuel_type_c)
+    drive_mode=models.CharField(max_length=10)
+
+    gear_box=models.CharField(max_length=10,choices=gear_box_c)
+    manage_city=models.CharField(max_length=10)
+    if_business=models.CharField(max_length=10,choices=if_business_c)

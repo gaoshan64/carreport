@@ -1,0 +1,1046 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>车辆报告打印</title>
+
+
+    <style>
+    html {
+  font-size: 12px;
+}
+    h1{
+    font-size: 30px;
+    padding:0;
+    margin:0;
+    }
+    h2{
+    font-size: 22px;
+     padding:0;
+     margin:0;
+    }
+     h3{
+    font-size: 16px;
+     padding:0;
+     margin:0;
+    }
+    td{
+    padding:5px;}
+    .up{
+    position:absolute;
+    z-index:10
+    }
+    .right
+    {float:right;}
+
+
+  .table{
+  table-layout: fixed;
+  word-break: break-all;
+  word-wrap: break-word;
+  width:100%;
+  border: 2px solid black;
+  border-collapse:collapse;
+
+
+  }
+  .table-active{
+  background-color:gray;
+  }
+  .small{
+  font-size: 10px;
+  }
+  .gray{
+  background-color:gray;}
+
+  .box{ margin:0 auto; width:680px;}
+  .img-fluid{width:100%}
+
+
+
+    </style>
+</head>
+<body>
+{# 封面#}
+<div class="box">
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 align="center">机动车技术工况</h1>
+    <h1 align="center"> 检测质量认证书（车况描述报告）</h1>
+    <h2 align="center">{{report.car_id.car_brand_model}}</h2>
+    <h2 align="center">({{report.car_id.car_id}})</h2>
+
+    <br>
+    <br>
+    <br>
+    <p style="text-align:center;"><img src="{%static 'wordcard.png'%}"></p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2 align="center">辽宁中车检机动车鉴定评估有限公司</h2>
+    <h2 align="center">{{report.create_date|date:"Y-m-d"}}</h2>
+    {# 封面#}
+    {# 第一页#}
+    <br>
+    <div class="containers">
+        <div style="position:relative">
+            <div class="up gray "><img height="50" width="50" src="{%static 'wordcard.png'%}"></div>
+            <h2 align="center">机动车技术工况</h2>
+            <h2 align="center">检车质量认证书</h2></div>
+
+        <div>
+            <div class="right small">委托基准日：{{report.create_date|date:"Y-m-d"}}</div>
+            <div class="small">车架号：{{report.car_id.car_id}}</div>
+        </div>
+
+        <table class="table table-bordered fs-5" border="1">
+            <tbody>
+            <tr>
+                <td colspan="6" align="center">
+                    <h3>车辆基本信息</h3>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-active">&nbsp;厂牌与型号</td>
+                <td>&nbsp;{{report.car_id.car_brand_model}}</td>
+                <td class="table-active">&nbsp;国产进口</td>
+                <td>&nbsp;{{report.car_id.get_if_import_display}}</td>
+                <td class="table-active">&nbsp;车牌号</td>
+                <td>&nbsp;{{report.car_id.car_license_tag_number}}</td>
+            </tr>
+            <tr>
+                <td class="table-active">&nbsp;车架号（VIN）</td>
+                <td class="small">{{report.car_id.car_id}}</td>
+                <td class="table-active">&nbsp;车身厢式</td>
+                <td>&nbsp;{{report.car_id.car_type}}</td>
+                <td class="table-active">&nbsp;车身颜色</td>
+                <td>&nbsp;{{report.car_id.car_color}}</td>
+            </tr>
+            <tr>
+                <td class="table-active">&nbsp;发动机号</td>
+                <td>&nbsp;{{report.car_id.engine_number}}</td>
+                <td class="table-active">&nbsp;发动机排量（L）</td>
+                <td>&nbsp;{{report.car_id.engine_cc }}</td>
+                <td class="table-active">发动机功率（kw）</td>
+                <td>&nbsp;{{report.car_id.engine_power }}</td>
+            </tr>
+            <tr>
+                <td class="table-active">&nbsp;动力方式</td>
+                <td>{{report.car_id.engine_power_mode}}</td>
+                <td class="table-active">&nbsp;燃料类别</td>
+                <td>&nbsp;{{report.car_id.get_fuel_type_display}}</td>
+                <td class="table-active">&nbsp;驱动方式</td>
+                <td>&nbsp;{{report.car_id.drive_mode}}</td>
+            </tr>
+            <tr>
+                <td class="table-active">&nbsp;变速箱形式</td>
+                <td>&nbsp;{{report.car_id.get_gear_box_display}}</td>
+                <td class="table-active">&nbsp;车辆管理属地</td>
+                <td>&nbsp;{{report.car_id.manage_city}}</td>
+                <td class="table-active">&nbsp;车辆使用性质</td>
+                <td>&nbsp;{{report.car_id.get_if_business_display}}</td>
+            </tr>
+            <tr>
+                <td class="table-active">初次登记日期</td>
+                <td>&nbsp;{{report.car_id.licence_first|date:"Y-m-d"}}</td>
+                <td class="table-active">发证日期</td>
+                <td>&nbsp;{{report.car_id.licence_issued|date:"Y-m-d"}}</td>
+                <td class="table-active">备注</td>
+                <td>&nbsp;</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered fs-5" cellpadding="1" border="1">
+            <tbody>
+            <tr>
+                <td colspan="6" align="center">
+                    <h3>车辆检测结果</h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" class="table-active" align="center">三项判定</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><h3>事故车:{% if report.report2.accident_car%}
+                    是
+                    {% else %}
+                    否
+                    {% endif %}</h3></td>
+                <td colspan="2" align="center"><h3>泡水车:{% if report.report2.water_car%}
+                    是
+                    {% else %}
+                    否
+                    {% endif %}</h3></td>
+                <td colspan="2" align="center"><h3>火烧车:{% if report.report2.fire_car%}
+                    是
+                    {% else %}
+                    否
+                    {% endif %}</h3></td>
+            </tr>
+            <tr>
+                <td colspan="6" class="table-active" align="center">整体车况等级</td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center"><h3>等级{{report.report2.car_level}}[A-H]</h3></td>
+                <td colspan="3" align="center"><h3>车况总得分/总分值 {{report.report2.car_score}}/1000</h3></td>
+            </tr>
+            <tr>
+                <td rowspan="5" align="center" class="table-active">车辆技术工况描述</td>
+                <td align="center" class="table-active">检测项目</td>
+                <td align="center">项目分值</td>
+                <td align="center" colspan="3">异常状况描述</td>
+            </tr>
+            <tr>
+                <td class="table-active">车身检测</td>
+                <td>{{report.report2.car_body_score}}/200</td>
+                <td colspan="3" rowspan="4">{{report.report2.car_u_c_describe}}</td>
+            </tr>
+            <tr>
+                <td class="table-active">底盘检查</td>
+                <td>{{report.report2.car_chassis_score}}/200</td>
+            </tr>
+            <tr>
+                <td class="table-active">动力检查</td>
+                <td>{{report.report2.car_power_score}}/300</td>
+            </tr>
+            <tr>
+                <td class="table-active">综合检查</td>
+                <td>{{report.report2.car_com_score}}/300</td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- DivTable.com -->
+    </div>
+    <div>
+
+        <BR>
+        <BR>
+        <BR>
+        <table STYLE="width:100%;">
+            <tbody>
+            <tr>
+                <td align="center">鉴定评估师</td>
+                <td>&nbsp;&nbsp;</td>
+                <td align="center">XXXXXXXX</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div>
+        <prep>
+            温馨提示：<br>
+            &nbsp;&nbsp;1.购买车辆后请尽快保养。<br>
+            &nbsp;&nbsp;2.养成良好习惯：出车前检查车辆油料和冷却液、轮胎气压、胎面、刹车等是否正常。<br>
+            &nbsp;&nbsp;3.车辆行驶中,请留意噪音或异响、仪表指示灯和故障警告灯，如发现问题请及时检查或关闭发动机<br>
+            检测说明：<br>
+            &nbsp;&nbsp;
+            &nbsp;&nbsp;
+        </prep>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;<br>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;<br>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;<br>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;<br>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;<br>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;<br>
+        &nbsp;&nbsp;
+        &nbsp;&nbsp;<br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <div>
+        <table class="table table-bordered fs-5" border="1" cellpadding="1">
+            <tbody>
+            <tr>
+                <td colspan="4" align="center" class="table-active">
+                    <h3>覆盖件及结构部分</h3>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="5">&nbsp;
+                    <h3>发动机盖</h3>
+                    &nbsp;&nbsp;
+                </td>
+                <td rowspan="5">最大值: {{report.report1.max_engine_cover}}</td>
+                <td>&nbsp;左上</td>
+                <td>&nbsp;{{report.report1.engine_cover_1}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;左下</td>
+                <td>&nbsp;{{report.report1.engine_cover_2}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;中</td>
+                <td>&nbsp;{{report.report1.engine_cover_3}}</td>
+            </tr>
+            <tr>
+                <td>右上</td>
+                <td>&nbsp;{{report.report1.engine_cover_4}}</td>
+            </tr>
+            <tr>
+                <td>右下</td>
+                <td>&nbsp;{{report.report1.engine_cover_5}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>左前翼子板</h3>
+                </td>
+                <td rowspan="3">
+                    最大值: {{report.report1.max_lfy}}
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.lfy_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.lfy_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.lfy_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="5">&nbsp;
+                    <h3>左前门</h3>
+                    &nbsp;&nbsp;
+                </td>
+                <td rowspan="5">最大值</td>
+                <td>&nbsp;左上</td>
+                <td>&nbsp;{{report.report1.lfd_1}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;左下</td>
+                <td>&nbsp;{{report.report1.lfd_2}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;中</td>
+                <td>&nbsp;{{report.report1.lfd_3}}</td>
+            </tr>
+            <tr>
+                <td>右上</td>
+                <td>&nbsp;{{report.report1.lfd_4}}</td>
+            </tr>
+            <tr>
+                <td>右下</td>
+                <td>&nbsp;{{report.report1.lfd_5}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="5">&nbsp;
+                    <h3>左后门</h3>
+                    &nbsp;&nbsp;
+                </td>
+                <td rowspan="5">最大值</td>
+                <td>&nbsp;左上</td>
+                <td>&nbsp;{{report.report1.lrd_1}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;左下</td>
+                <td>&nbsp;{{report.report1.lrd_2}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;中</td>
+                <td>&nbsp;{{report.report1.lrd_3}}</td>
+            </tr>
+            <tr>
+                <td>右上</td>
+                <td>&nbsp;{{report.report1.lrd_4}}</td>
+            </tr>
+            <tr>
+                <td>右下</td>
+                <td>&nbsp;{{report.report1.lrd_5}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>左后翼子板</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.lry_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.lry_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.lry_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+
+
+            <tr>
+                <td rowspan="5">&nbsp;
+                    <h3>后尾门</h3>
+                    &nbsp;&nbsp;
+                </td>
+                <td rowspan="5">最大值</td>
+                <td>&nbsp;左上</td>
+                <td>&nbsp;{{report.report1.td_1}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;左下</td>
+                <td>&nbsp;{{report.report1.td_2}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;中</td>
+                <td>&nbsp;{{report.report1.td_3}}</td>
+            </tr>
+            <tr>
+                <td>右上</td>
+                <td>&nbsp;{{report.report1.td_4}}</td>
+            </tr>
+            <tr>
+                <td>右下</td>
+                <td>&nbsp;{{report.report1.td_5}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3">
+                    <h3>右后翼子板</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.rry_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>{{report.report1.rry_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>{{report.report1.rry_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;<br></td>
+            </tr>
+
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br><br>
+
+        <table class="table table-bordered fs-5" border="1" cellpadding="1">
+            <tbody>
+            <td colspan="4" align="center" class="table-active">
+                <h3>覆盖件及结构部分</h3>
+            </td>
+            <tr>
+                <td rowspan="5">&nbsp;
+                    <h3>右后门</h3>
+                    &nbsp;&nbsp;
+                </td>
+                <td rowspan="5">最大值</td>
+                <td>&nbsp;左上</td>
+                <td>&nbsp;{{report.report1.rrd_1}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;左下</td>
+                <td>&nbsp;{{report.report1.rrd_2}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;中</td>
+                <td>&nbsp;{{report.report1.rrd_3}}</td>
+            </tr>
+            <tr>
+                <td>右上</td>
+                <td>&nbsp;{{report.report1.rrd_4}}</td>
+            </tr>
+            <tr>
+                <td>右下</td>
+                <td>&nbsp;{{report.report1.rrd_5}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="5">&nbsp;
+                    <h3>右前门</h3>
+                    &nbsp;&nbsp;
+                </td>
+                <td rowspan="5">最大值</td>
+                <td>&nbsp;左上</td>
+                <td>&nbsp;{{report.report1.rfd_1}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;左下</td>
+                <td>&nbsp;{{report.report1.rfd_2}}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;中</td>
+                <td>&nbsp;{{report.report1.rfd_3}}</td>
+            </tr>
+            <tr>
+                <td>右上</td>
+                <td>&nbsp;{{report.report1.rfd_4}}</td>
+            </tr>
+            <tr>
+                <td>右下</td>
+                <td>&nbsp;{{report.report1.rfd_5}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>右前翼子板</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>{{report.report1.rfy_1}}&nbsp;</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>{{report.report1.rfy_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.rfy_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>右A柱外</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.raw_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.raw_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.raw_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>右前门框架</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.rfdk_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.rfdk_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.rfdk_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3">
+                    <h3>右前门底坎</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.rfdd_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.rfdd_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.rfdd_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>右B柱</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>上</td>
+                <td>&nbsp;{{report.report1.rb_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.rb_2}}</td>
+            </tr>
+            <tr>
+                <td>下</td>
+                <td>&nbsp;{{report.report1.rb_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>右后门框架</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.rrdk_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.rrdk_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.rrdk_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3">
+                    <h3>右后门底坎</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.rrdd_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.rrdd_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.rrdd_3}}</td>
+            </tr>
+
+            </tbody>
+        </table>
+
+
+        <table class="table table-bordered fs-5" border="1" cellpadding="1">
+            <tbody>
+
+            <tr>
+                <td colspan="4" align="center" class="table-active">
+                    <h3>覆盖件及结构部分</h3>
+                </td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>右C柱</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>上</td>
+                <td>&nbsp;{{report.report1.rc_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.rc_2}}</td>
+            </tr>
+            <tr>
+                <td>下</td>
+                <td>&nbsp;{{report.report1.rc_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>左C柱</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>上</td>
+                <td>&nbsp;{{report.report1.lc_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.lc_2}}</td>
+            </tr>
+            <tr>
+                <td>下</td>
+                <td>&nbsp;{{report.report1.lc_1}}</td>
+            </tr>
+
+
+            <tr>
+                <td rowspan="3">
+                    <h3>左后门框架</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.lrdk_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.lrdk_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.lrdk_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>左后门底坎</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.lrdd_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.lrdd_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.lrdd_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3">
+                    <h3>左B柱</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>上</td>
+                <td>&nbsp;{{report.report1.lb_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.lb_2}}</td>
+            </tr>
+            <tr>
+                <td>下</td>
+                <td>&nbsp;{{report.report1.lb_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>左前门框架</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.lfdk_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.lfdk_1}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.lfdk_1}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td rowspan="3">
+                    <h3>左前门底坎</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>前</td>
+                <td>&nbsp;{{report.report1.lfdd_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.lfdd_2}}</td>
+            </tr>
+            <tr>
+                <td>后</td>
+                <td>&nbsp;{{report.report1.lfdd_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td rowspan="3">
+                    <h3>左A柱</h3>
+                </td>
+                <td rowspan="3">
+                    最大值
+                </td>
+                <td>上</td>
+                <td>&nbsp;{{report.report1.law_1}}</td>
+            </tr>
+            <tr>
+                <td>中</td>
+                <td>&nbsp;{{report.report1.law_2}}</td>
+            </tr>
+            <tr>
+                <td>下</td>
+                <td>&nbsp;{{report.report1.law_3}}</td>
+            </tr>
+            <tr>
+                <td colspan="4" align="center" class="table-active">
+                    <H3>发动机仓及动力部分</H3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><h3>前大灯总成：{{report.report1.get_light_display}}</h3></td>
+                <td colspan="2"><h3>水箱框架：{{report.report1.get_wboxk_display}}</h3></td>
+
+            </tr>
+            <tr>
+                <td colspan="1"><h3>机仓整体描述</h3></td>
+                <td colspan="3">{{report.report1.engine_desc}}</td>
+
+            </tr>
+            <tr>
+                <td colspan="4" align="center" class="table-active">
+                    <H3>车辆底盘部分</H3>
+                </td>
+            <tr>
+                <td colspan="1"><h3>油液渗漏描述</h3></td>
+                <td colspan="3">{{report.report1.oil_leak_d}}</td>
+            <tr>
+                <td colspan="1"><h3>底盘整体描述</h3></td>
+                <td colspan="3">{{report.report1.chassis_d}}</td>
+
+            </tr>
+
+
+
+
+            </tbody>
+        </table>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <table class="table table-bordered fs-5" border="1" cellpadding="1">
+            <tbody>
+            <tr>
+                <td colspan="2" class="table-active" align="center"><h3>车辆基本状况照片</h3></td>
+            </tr>
+            <tr>
+                <td>{%if report.report2.car_b_image_zq%}
+                    <img class="img-fluid" src="{{report.report2.car_b_image_zq.url}}">
+                    {%endif%}
+                </td>
+                <td>{%if report.report2.car_b_image_yh%}
+                    <img class="img-fluid" src="{{report.report2.car_b_image_yh.url}}">
+                    {%endif%}
+                </td>
+            </tr>
+            <tr>
+                <td align="center">左前45度</td>
+                <td align="center">右后45度</td>
+            </tr>
+            <tr>
+                <td> {%if report.report2.car_b_image_zqzy%}
+                    <img class="img-fluid" src="{{report.report2.car_b_image_zqzy.url}}">
+                    {%endif%}
+                </td>
+                <td>
+                    {%if report.report2.car_b_image_yhzy%}
+                    <img class="img-fluid" src="{{report.report2.car_b_image_yhzy.url}}">
+                    {%endif%}
+                </td>
+            </tr>
+            <tr>
+                <td align="center">左前座椅</td>
+                <td align="center">右后座椅</td>
+            </tr>
+            <tr>
+                <td>{%if report.report2.car_b_engcab%}
+                    <img class="img-fluid" src="{{report.report2.car_b_engcab.url}}">
+                    {%endif%}
+                </td>
+                <td>{%if report.report2.car_b_rcab%}
+                    <img class="img-fluid" src="{{report.report2.car_b_rcab.url}}">
+                    {%endif%}
+                </td>
+            </tr>
+            <tr>
+                <td align="center">发动机仓</td>
+                <td align="center">后备箱</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <table class="table table-bordered fs-5" border="1" cellpadding="1">
+            <tbody>
+            <tr>
+                <td colspan="2" class="table-active" align="center"><h3>车辆基本状况照片</h3></td>
+            </tr>
+            <tr>
+                <td>{%if report.report2.car_b_dashboard%}
+                    <img class="img-fluid" src="{{report.report2.car_b_dashboard.url}}">
+                    {%endif%}
+                </td>
+                <td>{%if report.report2.car_b_ccontrol%}
+                    <img class="img-fluid" src="{{report.report2.car_b_ccontrol.url}}">
+                    {%endif%}
+                </td>
+            </tr>
+
+
+            <tr>
+                <td align="center">仪表</td>
+                <td align="center">中控台</td>
+            </tr>
+            <tr>
+                <td>{%if report.report2.car_b_np%}
+                    <img class="img-fluid" src="{{report.report2.car_b_np.url}}">
+                    {%endif%}
+                </td>
+                <td>{%if report.report2.car_b_dm%}
+                    <img class="img-fluid" src="{{report.report2.car_b_dm.url}}">
+                    {%endif%}
+                </td>
+            </tr>
+            <tr>
+                <td align="center">车辆铭牌</td>
+                <td align="center">车辆识别代码</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <!-- DivTable.com -->
+
+
+    </div>
+</div>
+</body>
+</html>

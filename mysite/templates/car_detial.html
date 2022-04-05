@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{%block title%}用户记录{%endblock%}
+{%block search%}
+
+{%endblock%}
+{%block main%}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+             class="bi bi-speedometer" viewBox="0 0 16 16">
+            <path d="M8 2a.5.5 0 0 1 .5.5V4a.5.5 0 0 1-1 0V2.5A.5.5 0 0 1 8 2zM3.732 3.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 8a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 8zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 7.31A.91.91 0 1 0 8.85 8.569l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+            <path fill-rule="evenodd"
+                  d="M6.664 15.889A8 8 0 1 1 9.336.11a8 8 0 0 1-2.672 15.78zm-4.665-4.283A11.945 11.945 0 0 1 8 10c2.186 0 4.236.585 6.001 1.606a7 7 0 1 0-12.002 0z"/>
+        </svg>
+        车辆记录
+    </h1>
+</div>
+
+
+
+<div class="container-fluid">
+
+    <h3>{{car.car_color}}色{{car.car_brand_model}}{{car.car_license_tag_number}}</h3>
+
+    <h5>{{car.get_check_state_display}}</h5>
+    <div class="row">
+    <div class="col-12 col-md-3">{%for report in car.car_report.all%}
+        {%if forloop.last%}<img class="img-fluid" src="{{report.report2.car_b_image_zq.url}}">{%endif%}
+        {%endfor%}</div>
+    </div>
+    <div class="row">
+    <div class="col-12 col-md-4">
+    <div class="row align-items-start pt-1">
+        <div class="col-5">品牌型号:</div>
+        <div class="col-7"> {{car.car_brand_model}}</div>
+        <div class="col-5">车牌号:</div>
+        <div class="col-7"> {{car.car_license_tag_number}}</div>
+        <div class="col-5">车架号：</div>
+        <div class="col-7"> {{car.car_id}}</div>
+        <div class="col-5">发动机号:</div>
+        <div class="col-7">{{car.engine_number}}</div>
+        <div class="col-5">国产进口:</div>
+        <div class="col-7">{{car.get_if_import_display}}</div>
+        <div class="col-5">车身厢式:</div>
+        <div class="col-7">{{car.car_type}}</div>
+        <div class="col-5">车身颜色:</div>
+        <div class="col-7">{{car.car_color}}</div>
+        <div class="col-5">发动机排量（L）:</div>
+        <div class="col-7">{{car.engine_cc}}</div>
+        <div class="col-5">发动机功率（kw）:</div>
+        <div class="col-7">{{car.engine_power}}</div>
+        <div class="col-5">动力方式:</div>
+        <div class="col-7">{{car.engine_power_mode}}</div>
+        <div class="col-5">燃料类别:</div>
+        <div class="col-7">{{car.get_fuel_type_display}}</div>
+        <div class="col-5">驱动方式:</div>
+        <div class="col-7">{{car.drive_mode}}</div>
+         <div class="col-5">变速箱形式:</div>
+        <div class="col-7">{{car.get_gear_box_display}}</div>
+         <div class="col-5">车辆管理属地:</div>
+        <div class="col-7">{{car.manage_city}}</div>
+        <div class="col-5">车辆管理属地:</div>
+        <div class="col-7">{{car.manage_city}}</div>
+        <div class="col-5">初次登记日期:</div>
+        <div class="col-7">{{car.licence_first|date:"Y/m/d "}}</div>
+        <div class="col-5">发证日期:</div>
+        <div class="col-7">{{car.licence_issued|date:"Y/m/d "}}</div>
+
+
+    </div>
+    </div>
+    </div>
+    <div class="pt-5">
+    <a href="{%url 'car_list'%}" class="btn btn-primary btn-sm">返回</a>
+    <a href="{%url 'car_redit' car.id %}" class="btn btn-warning btn-sm">编辑</a>
+        {# <a class="btn btn-danger btn-sm" name="delete" href="javascript:" onclick="del_customer(this, {{ car.id }})">删除</a>#}
+    <a href="{%url 'report_list'%}?car_id={{car.id}}" class="btn btn-success btn-sm"  >报告</a>
+</div>
+    </div>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    function del_customer(the, car_id){
+        var car_name = '{{car.car_color}}色{{car.car_brand_model}}{{car.car_license_tag_number}}'
+
+        layer.open({
+            type: 1,
+            skin: "layui-layer-rim",
+            area: ["400px", "200px"],
+            title: "删除车辆",
+            content: '<div class="text-center" style="margin-top:20px"><p>是否确定删除用户'+car_name+'</p> </div>',
+            btn:['确定', '取消'], yes: function(){
+                $.ajax({
+                    url: '{% url "car_del" %}',
+                    type:"POST",
+                    data: {"car_id":car_id,"csrfmiddlewaretoken": '{{ csrf_token }}'},
+                    success: function(e){
+                        if(e=="1"){
+                            layer.msg("删除车辆"+car_name+"成功");
+                            parent.location.replace("{%url 'car_list'%}");
+                        }else{
+                            layer.msg("删除失败");
+                        }
+                    },
+                })
+            },
+        });
+    }
+</script>
+{%endblock%}

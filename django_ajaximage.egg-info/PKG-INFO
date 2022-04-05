@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: django-ajaximage
+Version: 0.2.9
+Summary: Upload images via ajax. Images are optionally resized.
+Home-page: https://github.com/bradleyg/django-ajaximage
+Author: Bradley Griffiths
+Author-email: bradley.griffiths@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.4
+
+UNKNOWN
+

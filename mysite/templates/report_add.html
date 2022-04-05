@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{%block title%}新增车辆{%endblock%}
+
+{%block search%}
+
+{%endblock%}
+{%block main%}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+    <h1 class="h2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+             class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                  d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
+        </svg>
+        车辆检测
+    </h1>
+</div>
+<div class="container ">
+    <div class="row  vertical-middle-sm">
+        <form class="form-horizontal" action="./{{report.id}}" method="post">
+            {% csrf_token %}
+
+
+
+            {% for f in form%}
+            {% if f.label == '事故车' %}
+            三项判定
+            {% endif %}
+
+
+            {% if f.id_for_label == 'id_engine_cover_1' %}
+            <h5>发动机盖</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lfy_1' %}
+            <h5>左前翼子板</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lfd_1' %}
+            <h5>左前门</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lrd_1' %}
+            <h5>左后门</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lry_1' %}
+            <h5>左后翼子板</h5>
+            <hr>
+            {% endif %}
+
+
+            {% if f.id_for_label == 'id_td_1' %}
+            <h5>后尾门</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rry_1' %}
+            <h5>右后翼子板</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rrd_1' %}
+            <h5>右后门</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rfd_1' %}
+            <h5>右前门</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rfy_1' %}
+            <h5>右前翼子板</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_raw_1' %}
+            <h5>右侧A柱外</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rfdk_1' %}
+            <h5>右前门框架</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rfdd_1' %}
+            <h5>右前门底坎</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rb_1' %}
+            <h5>右B柱</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rrdk_1' %}
+            <h5>右后门框架</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rrdd_1' %}
+            <h5>右后门底坎</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_rc_1' %}
+            <h5>右C柱</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lc_1' %}
+            <h5>左C柱</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lrdk_1' %}
+            <h5>左后门框架</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lrdd_1' %}
+            <h5>左后门底坎</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lb_1' %}
+            <h5>左B柱</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lfdk_1' %}
+            <h5>左前门框架</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_lfdd_1' %}
+            <h5>左前门底坎</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_law_1' %}
+            <h5>左A柱外</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_wboxk' %}
+            <h5>发动机仓动力部分</h5>
+            <hr>
+            {% endif %}
+
+            {% if f.id_for_label == 'id_oil_leak_d' %}
+            <h5>车辆底盘部分</h5>
+            <hr>
+            {% endif %}
+
+            <p>{% bootstrap_field f  layout='horizontal'%}</p>
+
+            {%endfor%}
+
+
+             {% comment %}
+            {% bootstrap_form form  layout="horizontal" %}
+             {% endcomment%}
+
+
+            <input type="submit" class="btn btn-primary " value="记录">
+        </form>
+    </div>
+</div>
+
+
+{%endblock%}

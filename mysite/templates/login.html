@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block search %}{% endblock %}
+{% block main %}
+<div class="row text-center justify-content-md-center pt-5">
+	<h2>登录</h2>
+	{% if user.username %}
+	<p>{{user.username}}您好，您没有相关权限请使用适当的用户登录或者返回</p>
+	{% else %}
+	<p>请输入账号密码登录</p>
+	{% endif %}
+	{% if form.errors %}
+        <p>用户名密码不匹配，请重试</p>
+    {% endif %}
+	<div class="col-md-4 col-md-offset-3 " style="float:middle">
+		{% if next %}
+    <form class="form-horizontal" action="{% url 'account:user_login' %}?next={{next}}" method="post" >
+    {% else %}
+		<form class="form-horizontal" action="{% url 'account:user_login' %}" method="post">
+	 {% endif %}
+			{% csrf_token %}
+			<!-- {{ form.as_p }} -->
+			<div class="form-floating pt-2 ">
+				{{ form.username }}
+				<label for="{{ form.username.id_for_label }}">用户名</label>
+			</div>
+			<div class="form-floating pt-2">
+
+				{{ form.password }}
+				<label for="{{ form.password.id_for_label }}">密码</label>
+			</div>
+			<div class="pt-2">
+				<button type="submit" class="btn btn-outline-primary">登录</button>
+				<a  class="btn btn-outline-primary" href="javascript:history.go(-1)">返回</a>
+			</div>
+
+		</form>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,684 @@
+{% extends "base.html" %}
+
+{%block title%}车辆报告{%endblock%}
+{%block search%}
+
+{%endblock%}
+{%block main%}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+             class="bi bi-files" viewBox="0 0 16 16">
+            <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+        </svg>
+        车辆报告
+    </h1>
+</div>
+<div class="container-fluid">
+
+
+    <div class="pt-5">
+        <a href="{%url 'report_list'%}" class="btn btn-primary btn-sm">返回</a>
+        <a href="{%url 'report1_redit' report.id %}" class="btn btn-secondary btn-sm">初检</a>
+        <a href="{%url 'report2_redit' report.id %}" class="btn btn-info btn-sm">复检</a>
+        <a href="{%url 'report_print' report.id %}" target="_blank" class="btn btn-success btn-sm">完成</a>
+
+        {#<a class="btn btn-danger btn-sm" name="delete" href="javascript:" onclick="del_report(this, {{ report.id }})">删除</a>#}
+
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="row align-items-start pt-1">
+                <div class="col-5"><h3>车辆</h3></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">品牌型号:</div>
+                <div class="col-7"> {{report.car_id.car_brand_model}}</div>
+                <div class="col-5">车牌号:</div>
+                <div class="col-7"> {{report.car_id.car_license_tag_number}}</div>
+                <div class="col-5">车架号：</div>
+                <div class="col-7"> {{report.car_id.car_id}}</div>
+                <div class="col-5">车身颜色:</div>
+                <div class="col-7">{{report.car_id.car_color}}</div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                {% if report.report1 %}
+                <div class="col-5"><h3>初检</h3></div>
+                <div class="col-7"><hr></div>
+
+                <div class="col-5">初检员</div>
+                <div class="col-7">{{report.report1.first_checker}}</div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+
+                <div class="col-5"><h5>发动机盖</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">左上</div>
+                <div class="col-7">{{report.report1.engine_cover_1}}</div>
+                <div class="col-5">左下</div>
+                <div class="col-7">{{report.report1.engine_cover_2}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.engine_cover_3}}</div>
+                <div class="col-5">右上</div>
+                <div class="col-7">{{report.report1.engine_cover_4}}</div>
+                <div class="col-5">右下</div>
+                <div class="col-7">{{report.report1.engine_cover_5}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.engine_cover_image%}
+                    <img class="img-fluid" src="{{report.report1.engine_cover_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>左前翼子板</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.lfy_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lfy_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.lfy_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lfy_image%}
+                    <img class="img-fluid" src="{{report.report1.lfy_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                 <div class="col-5"><h5>左前门</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">左上</div>
+                <div class="col-7">{{report.report1.lfd_1}}</div>
+                <div class="col-5">左下</div>
+                <div class="col-7">{{report.report1.lfd_2}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lfd_3}}</div>
+                <div class="col-5">右上</div>
+                <div class="col-7">{{report.report1.lfd_4}}</div>
+                <div class="col-5">右下</div>
+                <div class="col-7">{{report.report1.lfd_5}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lfd_image%}
+                    <img class="img-fluid" src="{{report.report1.lfd_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>左后门</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">左上</div>
+                <div class="col-7">{{report.report1.lrd_1}}</div>
+                <div class="col-5">左下</div>
+                <div class="col-7">{{report.report1.lrd_2}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lrd_3}}</div>
+                <div class="col-5">右上</div>
+                <div class="col-7">{{report.report1.lrd_4}}</div>
+                <div class="col-5">右下</div>
+                <div class="col-7">{{report.report1.lrd_5}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lrd_image%}
+                    <img class="img-fluid" src="{{report.report1.lrd_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>左后翼子板</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.lry_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lry_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.lry_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lry_image%}
+                    <img class="img-fluid" src="{{report.report1.lry_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>后尾门</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">左上</div>
+                <div class="col-7">{{report.report1.td_1}}</div>
+                <div class="col-5">左下</div>
+                <div class="col-7">{{report.report1.td_2}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.td_3}}</div>
+                <div class="col-5">右上</div>
+                <div class="col-7">{{report.report1.td_4}}</div>
+                <div class="col-5">右下</div>
+                <div class="col-7">{{report.report1.td_5}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.td_image%}
+                    <img class="img-fluid" src="{{report.report1.td_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右后翼子板</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.rry_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rry_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.rry_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rry_image%}
+                    <img class="img-fluid" src="{{report.report1.rry_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右后门</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">左上</div>
+                <div class="col-7">{{report.report1.rrd_1}}</div>
+                <div class="col-5">左下</div>
+                <div class="col-7">{{report.report1.rrd_2}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rrd_3}}</div>
+                <div class="col-5">右上</div>
+                <div class="col-7">{{report.report1.rrd_4}}</div>
+                <div class="col-5">右下</div>
+                <div class="col-7">{{report.report1.rrd_5}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rrd_image%}
+                    <img class="img-fluid" src="{{report.report1.rrd_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右前门</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">左上</div>
+                <div class="col-7">{{report.report1.rfd_1}}</div>
+                <div class="col-5">左下</div>
+                <div class="col-7">{{report.report1.rfd_2}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rfd_3}}</div>
+                <div class="col-5">右上</div>
+                <div class="col-7">{{report.report1.rfd_4}}</div>
+                <div class="col-5">右下</div>
+                <div class="col-7">{{report.report1.rfd_5}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rfd_image%}
+                    <img class="img-fluid" src="{{report.report1.rfd_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右前翼子板</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.rfy_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rfy_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.rfy_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rfy_image%}
+                    <img class="img-fluid" src="{{report.report1.rfy_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右侧A柱外</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">上</div>
+                <div class="col-7">{{report.report1.raw_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.raw_2}}</div>
+                <div class="col-5">下</div>
+                <div class="col-7">{{report.report1.raw_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.raw_image%}
+                    <img class="img-fluid" src="{{report.report1.raw_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右前门框架</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.rfdk_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rfdk_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.rfdk_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rfdk_image%}
+                    <img class="img-fluid" src="{{report.report1.rfdk_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右前门底坎</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.rfdd_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rfdd_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.rfdd_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rfdd_image%}
+                    <img class="img-fluid" src="{{report.report1.rfdd_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右B柱</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">上</div>
+                <div class="col-7">{{report.report1.rb_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rb_2}}</div>
+                <div class="col-5">下</div>
+                <div class="col-7">{{report.report1.rb_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rb_image%}
+                    <img class="img-fluid" src="{{report.report1.rb_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右后门框架</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.rrdk_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rrdk_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.rrdk_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rrdk_image%}
+                    <img class="img-fluid" src="{{report.report1.rrdk_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右后门底坎</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.rrdd_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rrdd_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.rrdd_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rrdd_image%}
+                    <img class="img-fluid" src="{{report.report1.rrdd_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>右C柱</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">上</div>
+                <div class="col-7">{{report.report1.rc_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.rc_2}}</div>
+                <div class="col-5">下</div>
+                <div class="col-7">{{report.report1.rc_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.rc_image%}
+                    <img class="img-fluid" src="{{report.report1.rc_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>左C柱</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">上</div>
+                <div class="col-7">{{report.report1.lc_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lc_2}}</div>
+                <div class="col-5">下</div>
+                <div class="col-7">{{report.report1.lc_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lc_image%}
+                    <img class="img-fluid" src="{{report.report1.lc_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+
+                <div class="col-5"><h5>左后门框架</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.lrdk_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lrdk_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.lrdk_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lrdk_image%}
+                    <img class="img-fluid" src="{{report.report1.lrdk_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+
+                <div class="col-5"><h5>左后门底坎</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.lrdd_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lrdd_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.lrdd_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lrdd_image%}
+                    <img class="img-fluid" src="{{report.report1.lrdd_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>左B柱</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">上</div>
+                <div class="col-7">{{report.report1.lb_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lb_2}}</div>
+                <div class="col-5">下</div>
+                <div class="col-7">{{report.report1.lb_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lb_image%}
+                    <img class="img-fluid" src="{{report.report1.lb_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>左前门框架</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.lfdk_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lfdk_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.lfdk_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lfdk_image%}
+                    <img class="img-fluid" src="{{report.report1.lfdk_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+
+                <div class="col-5"><h5>左前门底坎</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">前</div>
+                <div class="col-7">{{report.report1.lfdd_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.lfdd_2}}</div>
+                <div class="col-5">后</div>
+                <div class="col-7">{{report.report1.lfdd_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.lfdd_image%}
+                    <img class="img-fluid" src="{{report.report1.lfdd_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>左侧A柱外</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">上</div>
+                <div class="col-7">{{report.report1.law_1}}</div>
+                <div class="col-5">中</div>
+                <div class="col-7">{{report.report1.law_2}}</div>
+                <div class="col-5">下</div>
+                <div class="col-7">{{report.report1.law_3}}</div>
+                <div class="col-5">图片</div>
+                <div class="col-7">
+                    {%if report.report1.law_image%}
+                    <img class="img-fluid" src="{{report.report1.law_image.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h4>发动机仓及动力部分</h4></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">水箱框架</div>
+                <div class="col-7">{{report.report1.get_wboxk_display}}</div>
+                <div class="col-5">前大灯总成</div>
+                <div class="col-7">{{report.report1.get_light_display}}</div>
+                <div class="col-5">机舱整体描述</div>
+                <div class="col-7">{{report.report1.engine_desc}}</div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h4>车辆底盘部分</h4></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">油液渗漏描述</div>
+                <div class="col-7">{{report.report1.oil_leak_d}}</div>
+                <div class="col-5">底盘整理描述</div>
+                <div class="col-7">{{report.report1.chassis_d}}</div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+                {% endif %}
+
+                {% if report.report2 %}
+                <div class="col-5"><h3>复检</h3></div>
+                <div class="col-7"><hr></div>
+
+                <div class="col-5">复检员</div>
+                <div class="col-7">{{report.report2.second_checker}}</div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>三项判定</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">事故车</div>
+                <div class="col-7">{% if report.report2.accident_car%}
+                    是
+                    {% else %}
+                    否
+                    {% endif %}</div>
+                <div class="col-5">水泡车</div>
+                <div class="col-7">{% if report.report2.water_car%}
+                    是
+                    {% else %}
+                    否
+                    {% endif %}</div>
+                <div class="col-5">火烧车</div>
+                <div class="col-7">{% if report.report2.fire_car%}
+                    是
+                    {% else %}
+                    否
+                    {% endif %}</div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>整体车况等级</h5></div>
+                <div class="col-7"><hr></div>
+
+                <div class="col-5">车辆等级</div>
+                <div class="col-7">{{report.report2.get_car_level_display}}</div>
+                <div class="col-5">车身检查</div>
+                <div class="col-7">{{report.report2.car_body_score}}</div>
+                <div class="col-5">底盘检查</div>
+                <div class="col-7">{{report.report2.car_chassis_score}}</div>
+                <div class="col-5">动力检查</div>
+                <div class="col-7">{{report.report2.car_power_score}}</div>
+                <div class="col-5">综合检查</div>
+                <div class="col-7">{{report.report2.car_com_score}}</div>
+                <div class="col-5">车况得分</div>
+                <div class="col-7">{{report.report2.car_score}}</div>
+                <div class="col-5">异常状况描述</div>
+                <div class="col-7">{{report.report2.car_u_c_describe}}</div>
+                <div class="col-5">&nbsp; </div>
+                <div class="col-7"> </div>
+
+                <div class="col-5"><h5>车辆基本状况照片</h5></div>
+                <div class="col-7"><hr></div>
+                <div class="col-5">左前45</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_image_zq%}
+                    <img class="img-fluid" src="{{report.report2.car_b_image_zq.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">右后45</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_image_yh%}
+                    <img class="img-fluid" src="{{report.report2.car_b_image_yh.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">左前座椅</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_image_zqzy%}
+                    <img class="img-fluid" src="{{report.report2.car_b_image_zqzy.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">右后座椅</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_image_yhzy%}
+                    <img class="img-fluid" src="{{report.report2.car_b_image_yhzy.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">发动机仓</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_engcab%}
+                    <img class="img-fluid" src="{{report.report2.car_b_engcab.url}}">
+                    {%endif%}
+                </div>
+
+                <div class="col-5">后备箱</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_rcab%}
+                    <img class="img-fluid" src="{{report.report2.car_b_rcab.url}}">
+                    {%endif%}
+                </div>
+                <div class="col-5">仪表盘</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_dashboard%}
+                    <img class="img-fluid" src="{{report.report2.car_b_dashboard.url}}">
+                    {%endif%}
+                </div>
+
+                <div class="col-5">中控台</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_ccontrol%}
+                    <img class="img-fluid" src="{{report.report2.car_b_ccontrol.url}}">
+                    {%endif%}
+                </div>
+
+                <div class="col-5">车辆名牌</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_np%}
+                    <img class="img-fluid" src="{{report.report2.car_b_np.url}}">
+                    {%endif%}
+                </div>
+
+                <div class="col-5">车辆代码</div>
+                <div class="col-7">
+                    {%if report.report2.car_b_dm%}
+                    <img class="img-fluid" src="{{report.report2.car_b_dm.url}}">
+                    {%endif%}
+                </div>
+
+
+                {% endif %}
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+     <div class="pt-5">
+        <a href="{%url 'report_list'%}" class="btn btn-primary btn-sm">返回</a>
+        <a href="{%url 'report1_redit' report.id %}" class="btn btn-secondary btn-sm">初检</a>
+        <a href="{%url 'report2_redit' report.id %}" class="btn btn-info btn-sm">复检</a>
+        <a href="{%url 'report_print' report.id %}"  class="btn btn-success btn-sm">完成</a>
+
+        {#<a class="btn btn-danger btn-sm" name="delete" href="javascript:" onclick="del_report(this, {{ report.id }})">删除</a>#}
+
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function del_report(the, report_id){
+        var report_name = '{{report.car_id.car_color}}色{{report.car_id.car_brand_model}}{{report.car_id.car_license_tag_number}}报告{{report.id}}'
+
+        layer.open({
+            type: 1,
+            skin: "layui-layer-rim",
+            area: ["400px", "200px"],
+            title: "删除报告",
+            content: '<div class="text-center" style="margin-top:20px"><p>是否确定删除报告'+report_name+'</p> </div>',
+            btn:['确定', '取消'], yes: function(){
+                $.ajax({
+                    url: '{% url "report_del" %}',
+                    type:"POST",
+                    data: {"report_id":report_id,"csrfmiddlewaretoken": '{{ csrf_token }}'},
+                    success: function(e){
+                        if(e=="1"){
+                            layer.msg("删除用户"+report_name+"成功");
+                            parent.location.replace("{%url 'report_list'%}");
+                        }else{
+                            layer.msg("删除失败");
+                        }
+                    },
+                })
+            },
+        });
+    }
+
+</script>
+{%endblock%}

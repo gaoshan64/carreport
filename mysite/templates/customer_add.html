@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+
+{%block title%}新增加用户{%endblock%}
+
+{%block search%}
+
+{%endblock%}
+{%block main%}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+    <h1 class="h2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+             class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+            <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
+        </svg>
+        新建用户记录
+    </h1>
+</div>
+<div class="container ">
+<div class="row  vertical-middle-sm">
+    <form class="form-horizontal" action="./{{customer.id}}" method="post">
+
+        {% csrf_token %}
+        {% bootstrap_form form  layout="horizontal" %}
+
+
+
+
+        <input type="submit" class="btn btn-primary btn-sm" value="记录">
+    </form>
+</div>
+</div>
+{%endblock%}
