@@ -50,14 +50,18 @@ class Report2ContentForm(forms.ModelForm):
                   '+parseInt(id_car_chassis_score.value)' \
                   '+parseInt(id_car_power_score.value)' \
                   '+parseInt(id_car_com_score.value);'
+        max_value_200='if(value>200)value=200'
+        max_value_300='if(value>300)value=300'
+
         widgets = {
-            #'car_body_score':forms.IntegerField(attrs={'onChange':'c.value=parseInt(a.value)+parseInt(b.value);'}),
-            'car_chassis_score':forms.NumberInput(attrs={'onChange':plus_attr}),
-            'car_power_score':forms.NumberInput(attrs={'onChange':plus_attr}),
-            'car_com_score':forms.NumberInput(attrs={'onChange':plus_attr}),
-
-
-
+            'car_body_score':forms.NumberInput(attrs={'onChange':plus_attr,'min':'0','max':'200',
+                                                      'oninput':max_value_200}),
+            'car_chassis_score':forms.NumberInput(attrs={'onChange':plus_attr,'min':'0','max':'200',
+                                                         'oninput':max_value_200}),
+            'car_power_score':forms.NumberInput(attrs={'onChange':plus_attr,'min':'0','max':'300',
+                                                       'oninput':max_value_300}),
+            'car_com_score':forms.NumberInput(attrs={'onChange':plus_attr,'min':'0','max':'300',
+                                                     'oninput':max_value_300}),
         }
 
 class Report1ContentForm(forms.ModelForm):

@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from ajaximage.fields import AjaxImageField
 from django.db.models import BooleanField as _BooleanField
+from django.core.validators import MinValueValidator,MaxValueValidator
 
 
 # Create your models here.
@@ -281,10 +282,11 @@ class ReportsContent2(models.Model):
     car_level=models.CharField('车辆等级',max_length=10,choices=car_level_c,default='A')
 
     car_body_score=models.IntegerField('车身检查',default=0)
-    car_chassis_score=models.IntegerField('底盘检查',default=0)
-    car_power_score=models.IntegerField('动力检查',default=0)
-    car_com_score=models.IntegerField('综合检查',default=0)
-    car_score = models.IntegerField('车况得分',default=0)
+
+    car_chassis_score=models.IntegerField('底盘检查(200)',default=0)
+    car_power_score=models.IntegerField('动力检查(200)',default=0)
+    car_com_score=models.IntegerField('综合检查(300)',default=0)
+    car_score = models.IntegerField('车况得分(300)',default=0)
     car_u_c_describe=models.TextField('异常状况描述',max_length=1000,default='')
     #
     car_b_image_zq=AjaxImageField('左前45',blank=True,max_height=600,max_width=800,crop=True)
